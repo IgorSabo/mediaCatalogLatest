@@ -50,7 +50,7 @@ public class SingleTitleProcessor implements Callable<Map<RawNames, Title>> {
         String name = rawName.getName().toLowerCase().replaceAll("\\.", " ").replaceAll("_", " ").replaceAll("\\[", " ").replaceAll("\\]", " ").replaceAll("\\s+", " ").replaceAll("\\^", "").replaceAll("-", " ");
         System.out.println(name);
 
-        //extract2kg 222kg  year
+        //extract year
         year = TitleProcessorUtils.extractYear(name);
 
         //extract quality

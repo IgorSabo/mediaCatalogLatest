@@ -1,54 +1,24 @@
 package com.catalog.business.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by Gile on 5/18/2017.
  */
+@Getter
+@Setter
 public class Duplicate {
 
-    public Duplicate(int id, String location, String name, long occurence){
+    private Long id;
+    private int occurence;
+    private String location;
+    private String name;
+
+    public Duplicate(Long id, String location, String name, int occurence){
         this.id = id;
         this.location = location;
         this.occurence = occurence;
         this.name = name;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public long getOccurence() {
-        return occurence;
-    }
-
-    public void setOccurence(long occurence) {
-        this.occurence = occurence;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    int id;
-
-    long occurence;
-
-    String location;
-
-    String name;
 }

@@ -116,15 +116,6 @@ public class TitlesController {
         return "resultList :: resultsList";
     }
 
-//	@RequestMapping(value="GetTotalNumber", method= RequestMethod.GET)
-//	public @ResponseBody
-//    Map<String, Number> GetTotalNumber()
-//	{
-//		Number num = titleDaoI.getTotalEntities();
-//		HashMap<String, Number> map = new HashMap<String, Number>();
-//		map.put("totalFound", num);
-//		return map;
-//	}
 
     @RequestMapping(value = "/QuickSearchResults", method = RequestMethod.GET)
     public @ResponseBody
@@ -274,8 +265,9 @@ public class TitlesController {
 
     @RequestMapping(value = "/EditInfoNotInserted", method = RequestMethod.GET)
     public String EditInfoNotIserted(Model model, HttpServletRequest request) {
-        int idFilm = Integer.valueOf(request.getParameter("IDtitle"));
-        NotInserted title = noInsService.getOne(idFilm);
+        Long idFilm = Long.valueOf(request.getParameter("IDtitle"));
+        Optional<NotInserted> titleOpt = noInsService.findById(idFilm);
+        NotInserted title = titleOpt.get();
         ArrayList<Genre> genreList = (ArrayList<Genre>) genreService.findAll();
         ArrayList<Type> typeList = typeService.findAll();
         System.out.println("Entering EditInfoNotInserted, object found: " + title.toString());

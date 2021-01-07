@@ -67,10 +67,10 @@
                                 </div>
                                 <div class="col-md-6 pull-left titleType" style="padding-left: 30px;">
                                     <select id="editType">
-                                        <option value='1' th:selected="${titleInfo.IDtype==1}">Movie</option>
-                                        <option value='2' th:selected="${titleInfo.IDtype==2}">Series</option>
-                                        <option value='4' th:selected="${titleInfo.IDtype==3}">Game</option>
-                                        <option value='3' th:selected="${titleInfo.IDtype==4}">Other</option>
+                                        <option value='1' th:selected="${titleInfo.type.id==1}">Movie</option>
+                                        <option value='2' th:selected="${titleInfo.type.id==2}">Series</option>
+                                        <option value='4' th:selected="${titleInfo.type.id==3}">Game</option>
+                                        <option value='3' th:selected="${titleInfo.type.id==4}">Other</option>
                                     </select></div>
                             </div>
 
@@ -109,8 +109,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <!--th:onclick="'editTitleInfo(' + ${titleInfo!=null ? titleInfo.IDfilm : null} +',false' + ')'" -->
-                    <span class="btnSave" style="float: left;margin-left: 78%;">
-                                    <button type="button" th:if="${titleInfo != null}" class="btn btn-primary" th:onclick="'saveChanges('+${titleInfo.genre!=null ? titleInfo.IDfilm + ',false'+')' : titleInfo.IDfilm + ',true'+')'}">Save</button></span>
+                    <!--<span class="btnSave" style="float: left;"></span>-->
+                    <button type="button" class="btn btn-primary" th:onclick="'saveChanges('+${titleInfo.id} + ',false'+')'">Save</button>
 
                 </div>
             </div>

@@ -3,6 +3,7 @@ package com.catalog.business.repository;
 import com.catalog.model.Title;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,6 +17,6 @@ public interface TitleRepository extends CrudRepository<Title, Long>, TitleRepos
 
     Set<Title> findByImdbTitle(String title);
 
-    @Query("select count(t.imdbTitle), t.id, t.imdbTitle, t.location from Title t where t.type.id = :id")
-    int getNumberOfTitlesForType(Long id);
+    @Query("select count(t.id) from Title t where t.type.id = :id")
+    int getNumberOfTitlesForType(@Param("id") Long id);
 }

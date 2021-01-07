@@ -1,6 +1,7 @@
 package com.catalog.business.utils;
 
 
+import com.catalog.business.repository.TitleRepository;
 import com.catalog.business.repository.TypeRepository;
 import com.catalog.model.*;
 import com.catalog.service.CntByGenreService;
@@ -37,6 +38,9 @@ public class CntTablesManipulator {
 
 	 	@Autowired
 		TypeRepository typeRepository;
+
+		@Autowired
+		TitleRepository titleRepository;
 
 	    static HashMap<String, String> genreMap = new HashMap<String, String>();
 
@@ -75,9 +79,10 @@ public class CntTablesManipulator {
 	            //update count table for types
 	            for(Entry<Long, Type> entry : typeMap.entrySet())
 	            {
-	            	criteria = session.createCriteria(Title.class).add( Restrictions.eq("IDtype", entry.getKey() ) );
-	            	num = (Number)criteria.setProjection(Projections.rowCount()).uniqueResult();
-	            	System.out.println("Number of titles for "+entry.getValue()+": "+num.intValue());
+	            	/*criteria = session.createCriteria(Title.class).add( Restrictions.eq("type_id", entry.getKey() ) );
+	            	num = (Number)criteria.setProjection(Projections.rowCount()).uniqueResult();*/
+	            	num = titleRepository.getNumberOfTitlesForType(entry.getKey());
+	            	System.out.println("Number of titles for "+entry.getValue().getName()+": "+num.intValue());
 
 	            	for(CntByType typeStats : listCntByType)
 	            	{

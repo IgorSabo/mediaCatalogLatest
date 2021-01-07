@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Gile on 9/23/2016.
@@ -26,9 +27,8 @@ public class NotInsertedServiceImpl implements NotInsertedService {
     }
 
     @Override
-    @Transactional
-    public NotInserted getOne(int id) {
-        return null;//notInsertedRepository.findOne(id);
+    public Optional<NotInserted> findById(Long id) {
+        return notInsertedRepository.findById(id);
     }
 
     @Override

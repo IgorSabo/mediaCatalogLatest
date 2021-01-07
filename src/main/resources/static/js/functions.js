@@ -922,7 +922,9 @@ function fillSelectBoxes(server_response)
 	var yearSelectBody='<label for="sel1"><b>Select year:</b></label>'+
 		'<select class="form-control" id="selYear" style="margin-top: 10px" onChange="getSpecificCounts()">'+
 		'<option value=NotSelected>select a year</option>';
-	for(var i=1950; i<=2017;i++)
+
+    var d = new Date();
+	for(var i=1950; i<=d.getFullYear();i++)
 	{
 		yearSelectBody=yearSelectBody+'<option value="'+i+'">'+i+'</option>';
 	}

@@ -6,6 +6,4 @@ import org.springframework.data.repository.CrudRepository;
  * Created by Gile on 9/26/2016.
  */
 public interface TypeRepository extends CrudRepository<Type, Long> {
-
-    int
 }

@@ -346,10 +346,8 @@ public class TitleServiceImpl implements TitleService {
 		Set<Duplicate> duplicates = new HashSet();
 		List<Object[]> list = titleRepository.getDuplicates();
 		for(Object[] obj : list){
-			duplicates.add(new Duplicate((int) obj[1], (String) obj[3], (String) obj[2], (long) obj[0]));
+			duplicates.add(new Duplicate( (long) obj[1], (String) obj[3], (String) obj[2], Long.valueOf((long) obj[0] ).intValue() ));
 		}
-
-
 		return duplicates;
 	}
 
