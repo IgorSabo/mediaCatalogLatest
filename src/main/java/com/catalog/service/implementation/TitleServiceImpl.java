@@ -2,6 +2,7 @@ package com.catalog.service.implementation;
 
 import com.catalog.business.assemblers.TitleJsonResponseAssembler;
 import com.catalog.business.assemblers.TitleRatingsAssembler;
+import com.catalog.business.dto.TitleDto;
 import com.catalog.business.jobs.JobType;
 import com.catalog.business.repository.TitleRepository;
 import com.catalog.business.systemProcesses.ProcessStatus;
@@ -321,7 +322,7 @@ public class TitleServiceImpl implements TitleService {
 	}
 
 	@Override
-	public Set<Object[]> getQuickSearchResults(String word) {
+	public Set<TitleDto> getQuickSearchResults(String word) {
 		return titleRepository.getQuickSearchResults(word);
 	}
 

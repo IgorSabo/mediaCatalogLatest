@@ -1,5 +1,6 @@
 package com.catalog.service;
 
+import com.catalog.business.dto.TitleDto;
 import com.catalog.business.utils.Duplicate;
 import com.catalog.model.Title;
 
@@ -30,7 +31,7 @@ public interface TitleService {
 
     //public void synchronizeTitles();
 
-    Set<Object[]> getQuickSearchResults(String word);
+    Set<TitleDto> getQuickSearchResults(String word);
 
     Set<Title> getResults(String type, int page, int perPage, String genre, String year);
 

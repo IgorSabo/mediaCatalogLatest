@@ -1,5 +1,7 @@
 package com.catalog.service.implementation;
 
+import com.catalog.business.assemblers.TitleAssembler;
+import com.catalog.business.dto.TitleDto;
 import com.catalog.business.repository.TitleRepositoryCustom;
 import com.catalog.model.Title;
 import com.catalog.model.Type;
@@ -33,6 +35,9 @@ public class TitleRepositoryImpl implements TitleRepositoryCustom {
 
     @Autowired
     private TypeService typeService;
+
+    @Autowired
+    private TitleAssembler titleAssembler;
 
 
     @Override
@@ -123,22 +128,27 @@ public class TitleRepositoryImpl implements TitleRepositoryCustom {
 
     @Override
     @Transactional
-    public Set<Object[]> getQuickSearchResults(String word) {
-        Session session = em.unwrap(Session.class);
+    public Set<TitleDto> getQuickSearchResults(String word) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Title> titleQuery = cb.createQuery(Title.class);
+        Root<Title> t = titleQuery.from( Title.class );
+
+        Predicate predicateForName = cb.like(t.get("imdbTitle"),"%"+word+"%");
+        titleQuery.where(predicateForName);
+        Query limitedCriteriaQuery = em.createQuery( titleQuery );
+
+        /*Session session = em.unwrap(Session.class);
         Criteria criteria=session.createCriteria(Title.class);
         ProjectionList plist = Projections.projectionList();
         plist.add(Projections.property("IDfilm"));
         plist.add(Projections.property("imdbTitle"));
         criteria.add(Restrictions.like("imdbTitle", "%"+word+"%"));
-        criteria.setProjection(plist);
+        criteria.setProjection(plist);*/
 
-        ArrayList<Object[]> list = (ArrayList<Object[]>) criteria.list();
+        List<Title> list = (ArrayList<Title>) limitedCriteriaQuery.getResultList();
 
         System.out.println("Size of the results for word "+word+" is "+list.size());
-
-        HashSet<Object[]> set = new HashSet<>();
-        set.addAll(list);
-        return set;
+        return list.stream().map( d -> titleAssembler.assmebleTitleDtoFromTitleEntity(d) ).collect(Collectors.toSet());
     }
 
 

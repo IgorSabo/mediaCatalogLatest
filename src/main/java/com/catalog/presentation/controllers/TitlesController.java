@@ -1,5 +1,6 @@
 package com.catalog.presentation.controllers;
 
+import com.catalog.business.dto.TitleDto;
 import com.catalog.business.utils.*;
 import com.catalog.model.*;
 import com.catalog.service.*;
@@ -119,13 +120,9 @@ public class TitlesController {
 
     @RequestMapping(value = "/QuickSearchResults", method = RequestMethod.GET)
     public @ResponseBody
-    ArrayList<Object[]> getQuickSearchResults(HttpServletRequest request) {
+    List<TitleDto> getQuickSearchResults(HttpServletRequest request) {
         String name = request.getParameter("name");
-
-        HashSet<Object[]> set = (HashSet<Object[]>) titleService.getQuickSearchResults(name);
-        ArrayList<Object[]> list = new ArrayList<>();
-        list.addAll(set);
-        return list;
+        return new ArrayList<> (titleService.getQuickSearchResults(name));
     }
 
     @RequestMapping(value = "/ShowInfo", method = RequestMethod.GET)

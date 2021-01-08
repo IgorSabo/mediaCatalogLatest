@@ -67,7 +67,7 @@ function returnHtmlContent(json)
    {
 	   var entry=json[i];
         contentHtml+='<li class="result ">';
-        contentHtml+='<h3 id='+json[i][0]+'><b>'+capitaliseFirstLetter(json[i][1])+'</b></h3>';
+        contentHtml+='<h3 id='+entry.id+'><b>'+capitaliseFirstLetter(entryl.imdbTitle)+'</b></h3>';
         contentHtml+='</li>';
    }
         return contentHtml;
